@@ -21,76 +21,19 @@ import {
     CommandSeparator,
 } from '@/components/ui/command';
 import { Kbd, KbdGroup } from '@/components/ui/kbd';
+import { useI18n } from '@/i18n/provider';
 
-interface SearchItem {
-    value: string;
-    label: string;
-    href: string;
-    keywords?: string;
-}
+import { docsNav, type DocsNavItem, type DocsNavSection } from '@/lib/docs-nav';
 
-interface SearchGroup {
-    value: string;
-    items: SearchItem[];
-}
+type SearchItem = DocsNavItem;
+type SearchGroup = DocsNavSection;
 
-const searchGroups: SearchGroup[] = [
-    {
-        value: 'Getting Started',
-        items: [
-            {
-                label: 'Introduction',
-                value: 'introduction',
-                href: '/docs',
-                keywords: 'getting started overview what is'
-            },
-            {
-                label: 'Installation',
-                value: 'installation',
-                href: '/docs/installation',
-                keywords: 'install setup init npm npx global cli'
-            },
-        ],
-    },
-    {
-        value: 'Core Concepts',
-        items: [
-            {
-                label: 'Agents',
-                value: 'agents',
-                href: '/docs/agents',
-                keywords: 'specialist personas orchestrator planner security backend frontend'
-            },
-            {
-                label: 'Skills',
-                value: 'skills',
-                href: '/docs/skills',
-                keywords: 'knowledge modules react nextjs tailwind patterns testing'
-            },
-            {
-                label: 'Workflows',
-                value: 'workflows',
-                href: '/docs/workflows',
-                keywords: 'slash commands brainstorm create debug deploy enhance'
-            },
-        ],
-    },
-    {
-        value: 'Reference',
-        items: [
-            {
-                label: 'CLI Reference',
-                value: 'cli',
-                href: '/docs/cli',
-                keywords: 'command line interface init update status options'
-            },
-        ],
-    },
-];
+const searchGroups: SearchGroup[] = docsNav;
 
 export default function SearchDialog() {
     const [open, setOpen] = useState(false);
     const router = useRouter();
+    const { t } = useI18n();
 
     function handleItemClick(item: SearchItem) {
         router.push(item.href);
@@ -122,7 +65,7 @@ export default function SearchDialog() {
                     />
                 }
             >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </CommandDialogTrigger>
@@ -140,7 +83,7 @@ export default function SearchDialog() {
                 <svg className="w-4 h-4 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span className="flex-1 text-left">Search docs...</span>
+                <span className="flex-1 text-left">{t.search.placeholder}</span>
                 <KbdGroup className="hidden sm:inline-flex">
                     <Kbd>⌘</Kbd>
                     <Kbd>K</Kbd>
@@ -149,31 +92,31 @@ export default function SearchDialog() {
 
             <CommandDialogPopup>
                 <Command items={searchGroups}>
-                    <CommandInput placeholder="Search documentation..." />
+                    <CommandInput placeholder={t.search.inputPlaceholder} />
                     <CommandPanel>
                         <CommandEmpty>
                             <div className="flex flex-col items-center justify-center py-6 text-center">
                                 <svg className="w-10 h-10 text-muted-foreground/30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <p className="text-sm font-medium text-foreground mb-1">No results found</p>
-                                <p className="text-xs text-muted-foreground">Try searching for something else</p>
+                                <p className="text-sm font-medium text-foreground mb-1">{t.search.noResults}</p>
+                                <p className="text-xs text-muted-foreground">{t.search.noResultsHint}</p>
                             </div>
                         </CommandEmpty>
                         <CommandList>
                             {(group: SearchGroup) => (
-                                <Fragment key={group.value}>
+                                <Fragment key={group.title}>
                                     <CommandGroup items={group.items}>
-                                        <CommandGroupLabel>{group.value}</CommandGroupLabel>
+                                        <CommandGroupLabel>{(group.titleKey && (t.search as unknown as Record<string, string>)[group.titleKey]) || group.title}</CommandGroupLabel>
                                         <CommandCollection>
                                             {(item: SearchItem) => (
                                                 <CommandItem
-                                                    key={item.value}
+                                                    key={item.href}
                                                     onClick={() => handleItemClick(item)}
-                                                    value={item.value + ' ' + (item.keywords || '')}
+                                                    value={item.label + ' ' + (item.keywords || '')}
                                                 >
                                                     <FileTextIcon className="mr-2 h-4 w-4 text-muted-foreground" />
-                                                    <span className="flex-1">{item.label}</span>
+                                                    <span className="flex-1">{(item.labelKey && (t.search as unknown as Record<string, string>)[item.labelKey]) || item.label}</span>
                                                     <span className="text-xs text-muted-foreground">{item.href}</span>
                                                 </CommandItem>
                                             )}
@@ -195,18 +138,18 @@ export default function SearchDialog() {
                                         <ArrowDownIcon className="h-3 w-3" />
                                     </Kbd>
                                 </KbdGroup>
-                                <span className="text-xs text-muted-foreground">Navigate</span>
+                                <span className="text-xs text-muted-foreground">{t.search.navigate}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Kbd>
                                     <CornerDownLeftIcon className="h-3 w-3" />
                                 </Kbd>
-                                <span className="text-xs text-muted-foreground">Select</span>
+                                <span className="text-xs text-muted-foreground">{t.search.select}</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
                             <Kbd>Esc</Kbd>
-                            <span className="text-xs text-muted-foreground">Close</span>
+                            <span className="text-xs text-muted-foreground">{t.search.close}</span>
                         </div>
                     </CommandFooter>
                 </Command>

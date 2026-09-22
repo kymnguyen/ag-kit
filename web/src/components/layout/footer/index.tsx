@@ -1,33 +1,37 @@
+"use client";
 
 import Link from "next/link";
+import { useI18n } from "@/i18n/provider";
 
 export default function Footer() {
+    const { t } = useI18n();
+    const f = t.footer;
     return (
-        <footer className="border-t border-zinc-200 dark:border-zinc-800 mt-auto">
+        <footer className="border-t border-border mt-auto">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                     {/* Product */}
                     <div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Product</h3>
+                        <h3 className="font-semibold text-foreground mb-4">{f.product}</h3>
                         <ul className="space-y-3 text-sm">
                             <li>
-                                <Link href="/docs" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Documentation
+                                <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.documentation}
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/docs/agents" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Agents
+                                <Link href="/docs/agents" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.agents}
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/docs/skills" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Skills
+                                <Link href="/docs/skills" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.skills}
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/docs/workflows" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Workflows
+                                <Link href="/docs/workflows" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.workflows}
                                 </Link>
                             </li>
                         </ul>
@@ -35,53 +39,53 @@ export default function Footer() {
 
                     {/* Resources */}
                     <div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Resources</h3>
+                        <h3 className="font-semibold text-foreground mb-4">{f.resources}</h3>
                         <ul className="space-y-3 text-sm">
                             <li>
-                                <Link href="/docs/installation" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Installation
+                                <Link href="/docs/installation" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.installation}
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/docs/cli" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    CLI Reference
+                                <Link href="/docs/cli" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.cliReference}
                                 </Link>
                             </li>
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Examples
+                                <a href="https://github.com/kymnguyen/ag-kit" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.examples}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit/releases" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Changelog
-                                </a>
+                                <Link href="/docs/changelog" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.changelog}
+                                </Link>
                             </li>
                         </ul>
                     </div>
 
                     {/* Community */}
                     <div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Community</h3>
+                        <h3 className="font-semibold text-foreground mb-4">{f.community}</h3>
                         <ul className="space-y-3 text-sm">
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    GitHub
+                                <a href="https://github.com/kymnguyen/ag-kit" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.github}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit/issues" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Issues
+                                <a href="https://github.com/kymnguyen/ag-kit/issues" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.issues}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit/discussions" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Discussions
+                                <a href="https://github.com/kymnguyen/ag-kit/discussions" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.discussions}
                                 </a>
                             </li>
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Contributing
+                                <a href="https://github.com/kymnguyen/ag-kit/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.contributing}
                                 </a>
                             </li>
                         </ul>
@@ -89,21 +93,21 @@ export default function Footer() {
 
                     {/* Legal */}
                     <div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Legal</h3>
+                        <h3 className="font-semibold text-foreground mb-4">{f.legal}</h3>
                         <ul className="space-y-3 text-sm">
                             <li>
-                                <a href="https://github.com/vudovn/antigravity-kit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    License
+                                <a href="https://github.com/kymnguyen/ag-kit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.license}
                                 </a>
                             </li>
                             <li>
-                                <Link href="#1" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Privacy Policy
+                                <Link href="#1" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.privacy}
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#1" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
-                                    Terms of Service
+                                <Link href="#1" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {f.terms}
                                 </Link>
                             </li>
                         </ul>
@@ -111,26 +115,26 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Copyright */}
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                        © {new Date().getFullYear()} Antigravity Kit by{" "}
+                    <p className="text-sm text-muted-foreground">
+                        © {new Date().getFullYear()} AG Kit by{" "}
                         <a
-                            href="https://github.com/vudovn"
+                            href="https://github.com/kymnguyen"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-zinc-900 dark:text-zinc-50 hover:underline">
-                            @vudovn
-                        </a>. All rights reserved.
+                            className="font-medium text-foreground hover:underline">
+                            @kymnguyen
+                        </a>. {f.rights}
                     </p>
 
                     {/* Social Links */}
                     <div className="flex items-center gap-4">
                         <a
-                            href="https://github.com/vudovn/antigravity-kit"
+                            href="https://github.com/kymnguyen/ag-kit"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+                            className="text-muted-foreground hover:text-foreground transition-colors"
                             aria-label="GitHub"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -138,10 +142,10 @@ export default function Footer() {
                             </svg>
                         </a>
                         <a
-                            href="https://facebook.com/vudovn.354"
+                            href="https://facebook.com/kymnguyen.354"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+                            className="text-muted-foreground hover:text-foreground transition-colors"
                             aria-label="Facebook"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
